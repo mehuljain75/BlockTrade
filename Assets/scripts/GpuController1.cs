@@ -116,6 +116,9 @@ public class GpuController1 : MonoBehaviour
             smallObject.SetActive(true);
         }
 
+
+
+
         NavMeshAgent smallObjectNavMeshAgent = smallObject.GetComponent<NavMeshAgent>();
 
         if (smallObjectNavMeshAgent != null && moveTransform != null)
@@ -149,28 +152,23 @@ public class GpuController1 : MonoBehaviour
             else if (count > capacity1 && count <= capacity2)
             {
                 //SpawnSmallObject(move[1]);
-                    alertManager.ShowAlert1();
             }
             else if (count > capacity2 && count <= capacity3)
             {
                 //SpawnSmallObject(move[2]);
-                alertManager.ShowAlert2();
             }
             else if (count > capacity3 && count <= capacity4)
             {
                 //SpawnSmallObject(move[3]);
-                alertManager.ShowAlert3();
             }
             else if (count > capacity4 && count <= capacity5)
             {
                 //SpawnSmallObject(move[4]);
-                alertManager.ShowAlert4();
             }
 
             else if (count > capacity5 && count <= capacity6)
             {
                 //SpawnSmallObject(move[0]);
-                alertManager.ShowAlert5();
             }
             /*else if (count > capacity6 && count <= capacity7)
             {

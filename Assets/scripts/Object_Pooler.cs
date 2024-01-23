@@ -7,7 +7,7 @@ public class Object_Pooler : MonoBehaviour
     public static Object_Pooler instance;
 
     public List<GameObject> pooledObjects = new List<GameObject>();
-    private int ammountToPool = 500;
+    private int ammountToPool = 100;
 
     [SerializeField] private GameObject gpuPrebab;
     void Start()

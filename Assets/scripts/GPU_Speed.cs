@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class GPU_Speed : MonoBehaviour
 {
     public NavMeshAgent agent;
+    public  Button button;
 
     private void Start()
     {
@@ -11,7 +13,7 @@ public class GPU_Speed : MonoBehaviour
     }
     private void Update()
     {
-        //FactoryLevel10();
+        button.onClick.AddListener(FactoryLevel10);
     }
     public void FactoryLevel2()
     {
@@ -55,7 +57,8 @@ public class GPU_Speed : MonoBehaviour
 
     public void FactoryLevel10()
     {
-        agent.speed = 14f;
+        agent.speed = 100f;
+        agent.acceleration=300f;
         Debug.Log("Factory Level 10 speed set -------------------------------------------------------");
     }
 

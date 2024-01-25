@@ -9,10 +9,11 @@ public class GpuController1 : MonoBehaviour
     public GameObject smallObjectPrefab;
 
     // destination for the gpu's
-    [SerializeField] private Transform[] move;
+    public Transform[] move;
 
     //for count the click
-    public int count = 0;
+    public int count = -1;
+
 
     // for clicking the button
     public Button click;
@@ -107,17 +108,14 @@ public class GpuController1 : MonoBehaviour
 
     public void SpawnSmallObject(Transform moveTransform)
     {
-
         GameObject smallObject = Object_Pooler.instance.GetPooledObject();
+        smallObject.GetComponent<BoxCollider>().enabled = true;
 
         if (smallObject != null)
         {
             smallObject.transform.position = transform.position;
             smallObject.SetActive(true);
         }
-
-
-
 
         NavMeshAgent smallObjectNavMeshAgent = smallObject.GetComponent<NavMeshAgent>();
 
@@ -141,13 +139,13 @@ public class GpuController1 : MonoBehaviour
             Transform destinationTransform = move[destinationIndex];
 
             // Spawn the small object at the calculated destination
-                SpawnSmallObject(destinationTransform);
+            SpawnSmallObject(destinationTransform);
 
             //  Conditions for spawning small objects based on capacity
 
             if (count > 0 && count <= capacity1)
-            {                
-                    //SpawnSmallObject(move[0]);
+            {
+                //SpawnSmallObject(move[0]);
             }
             else if (count > capacity1 && count <= capacity2)
             {
@@ -272,6 +270,5 @@ public class GpuController1 : MonoBehaviour
             }*/
         }
     }
-     
-}
 
+}

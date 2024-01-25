@@ -26,26 +26,54 @@ public class FarmCapacity : MonoBehaviour
         if (size > gpuController1.capacity1)
         {
             alertManager.ShowAlert1();
+            
+            /*if (gpuController1.move[0]!=null) 
+            {
+                Destroy(gpuController1.move[0].gameObject);
+                gpuController1.move.RemoveAt(0);
+            }*/
         }
 
         if (size > gpuController1.capacity2)
         {
             alertManager.ShowAlert2();
+
+            /*if (gpuController1.move[1] != null)
+            {
+                Destroy(gpuController1.move[1].gameObject);
+                gpuController1.move.RemoveAt(1);
+            }*/
         }
 
         if (size > gpuController1.capacity3)
         {
-            alertManager.ShowAlert3();
+            
+            /*alertManager.ShowAlert3();
+            if (gpuController1.move[2] != null)
+            {
+                Destroy(gpuController1.move[2].gameObject);
+                gpuController1.move.RemoveAt(2);
+            }*/
         }
 
         if (size > gpuController1.capacity4)
         {
             alertManager.ShowAlert4();
+            /*if (gpuController1.move[3] != null)
+            {
+                Destroy(gpuController1.move[3].gameObject);
+                gpuController1.move.RemoveAt(3);
+            }*/
         }
 
         if (size > gpuController1.capacity5)
         {
             alertManager.ShowAlert5();
+            /*if (gpuController1.move[4] != null)
+            {
+                Destroy(gpuController1.move[4].gameObject);
+                gpuController1.move.RemoveAt(4);
+            }*/
         }
     }
 }

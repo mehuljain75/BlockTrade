@@ -14,6 +14,7 @@ public class FarmCapacity : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //gpuController1.move.Clear();
         if (other.CompareTag("gpu"))
         {
             size++;
@@ -23,57 +24,78 @@ public class FarmCapacity : MonoBehaviour
 
 
         //checking the condition here for collision
-        if (size > gpuController1.capacity1)
+        if (size > gpuController1.capacity1 && gpuController1.move.Count==5)
         {
             alertManager.ShowAlert1();
-            
-            /*if (gpuController1.move[0]!=null) 
+
+            if (gpuController1.move != null)
             {
-                Destroy(gpuController1.move[0].gameObject);
+               /* Destroy(gpuController1.move[0].gameObject);*/
                 gpuController1.move.RemoveAt(0);
-            }*/
+            }
+            else
+            {
+                Debug.Log("Please Upgrade!!!");
+            }
         }
 
-        if (size > gpuController1.capacity2)
+        if (size > gpuController1.capacity2 && gpuController1.move.Count == 4)
         {
             alertManager.ShowAlert2();
 
-            /*if (gpuController1.move[1] != null)
+            if (gpuController1.move != null)
             {
-                Destroy(gpuController1.move[1].gameObject);
-                gpuController1.move.RemoveAt(1);
-            }*/
+                //Destroy(gpuController1.move[0].gameObject);
+                gpuController1.move.RemoveAt(0);
+            }
+            else
+            {
+                Debug.Log("Please Upgrade!!!");
+            }
         }
 
-        if (size > gpuController1.capacity3)
+        if (size > gpuController1.capacity3 && gpuController1.move.Count == 3)
         {
-            
-            /*alertManager.ShowAlert3();
-            if (gpuController1.move[2] != null)
+
+            alertManager.ShowAlert3();
+            if (gpuController1.move != null)
             {
-                Destroy(gpuController1.move[2].gameObject);
-                gpuController1.move.RemoveAt(2);
-            }*/
+                //Destroy(gpuController1.move[0].gameObject);
+                gpuController1.move.RemoveAt(0);
+            }
+            else
+            {
+                Debug.Log("Please Upgrade!!!");
+            }
         }
 
-        if (size > gpuController1.capacity4)
+        if (size > gpuController1.capacity4 && gpuController1.move.Count == 1)
         {
             alertManager.ShowAlert4();
-            /*if (gpuController1.move[3] != null)
+            if (gpuController1.move != null)
             {
-                Destroy(gpuController1.move[3].gameObject);
-                gpuController1.move.RemoveAt(3);
-            }*/
+                //Destroy(gpuController1.move[0].gameObject);
+                gpuController1.move.RemoveAt(0);
+            }
+            else
+            {
+                Debug.Log("Please Upgrade!!!");
+            }
         }
 
-        if (size > gpuController1.capacity5)
+        if (size > gpuController1.capacity5 && gpuController1.move.Count == 0)
         {
             alertManager.ShowAlert5();
-            /*if (gpuController1.move[4] != null)
+            if (gpuController1.move != null)
             {
-                Destroy(gpuController1.move[4].gameObject);
-                gpuController1.move.RemoveAt(4);
-            }*/
+               // Destroy(gpuController1.move[0].gameObject);
+                gpuController1.move.RemoveAt(0);
+            }
+            else
+            {
+                Debug.Log("Please Upgrade!!!");
+            }
         }
+        
     }
 }

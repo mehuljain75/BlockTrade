@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class GpuController1 : MonoBehaviour
@@ -9,18 +10,13 @@ public class GpuController1 : MonoBehaviour
     public GameObject smallObjectPrefab;
 
     // destination for the gpu's
-    public Transform[] move;
+    public List<Transform> move = new List<Transform>();
 
     //for count the click
-    public int count = -1;
-
-
-    // for clicking the button
-    public Button click;
+    public int count = 0;
 
     // calling Refill Script
     public Refill refillScript;
-
 
     //Alert ui when house is full
     public AlertManager alertManager;
@@ -108,166 +104,87 @@ public class GpuController1 : MonoBehaviour
 
     public void SpawnSmallObject(Transform moveTransform)
     {
+
         GameObject smallObject = Object_Pooler.instance.GetPooledObject();
-        smallObject.GetComponent<BoxCollider>().enabled = true;
+
+        
 
         if (smallObject != null)
         {
+            smallObject.GetComponent<BoxCollider>().enabled = true;
+
+
             smallObject.transform.position = transform.position;
             smallObject.SetActive(true);
+
+            NavMeshAgent smallObjectNavMeshAgent = smallObject.GetComponent<NavMeshAgent>();
+
+            if (smallObjectNavMeshAgent != null && moveTransform != null)
+            {
+                smallObjectNavMeshAgent.destination = moveTransform.position;
+            }
         }
 
-        NavMeshAgent smallObjectNavMeshAgent = smallObject.GetComponent<NavMeshAgent>();
-
-        if (smallObjectNavMeshAgent != null && moveTransform != null)
-        {
-            smallObjectNavMeshAgent.destination = moveTransform.position;
-        }
     }
 
     public void OnClick()
     {
-        // for the refill bar
-        if (refillScript.slider.value > 3)
+        if (move.Count > 0)
         {
-            count++;
+            
 
-            // Calculate the index of the destination based on the count
-            int destinationIndex = count % move.Length;
+            // for the refill bar
+            if (refillScript.slider.value > -1)
+            {
+                count++;
+                // Calculate the index of the destination based on the count
 
-            // Get the corresponding destination transform
-            Transform destinationTransform = move[destinationIndex];
+                //int destinationIndex = count % move.Count - 1;
+                int destinationIndex = Random.Range(0, move.Count);
 
-            // Spawn the small object at the calculated destination
-            SpawnSmallObject(destinationTransform);
+                Debug.Log("Destination index out of range: " + destinationIndex + " move   " + move.Count);
 
-            //  Conditions for spawning small objects based on capacity
 
-            if (count > 0 && count <= capacity1)
-            {
-                //SpawnSmallObject(move[0]);
-            }
-            else if (count > capacity1 && count <= capacity2)
-            {
-                //SpawnSmallObject(move[1]);
-            }
-            else if (count > capacity2 && count <= capacity3)
-            {
-                //SpawnSmallObject(move[2]);
-            }
-            else if (count > capacity3 && count <= capacity4)
-            {
-                //SpawnSmallObject(move[3]);
-            }
-            else if (count > capacity4 && count <= capacity5)
-            {
-                //SpawnSmallObject(move[4]);
-            }
+                // Get the corresponding destination transform
+                Transform destinationTransform = move[destinationIndex];
 
-            else if (count > capacity5 && count <= capacity6)
-            {
-                //SpawnSmallObject(move[0]);
-            }
-            /*else if (count > capacity6 && count <= capacity7)
-            {
-                SpawnSmallObject(move[1]);
-            }
-            else if (count > capacity7 && count <= capacity8)
-            {
-                SpawnSmallObject(move[2]);
-            }
-            else if (count > capacity8 && count <= capacity9)
-            {
-                SpawnSmallObject(move[3]);
-            }
-            else if (count > capacity9 && count <= capacity10)
-            {
-                SpawnSmallObject(move[4]);
-            }
+                // Spawn the small object at the calculated destination
+                SpawnSmallObject(destinationTransform);
 
-            else if (count > capacity10 && count <= capacity11)
-            {
-                SpawnSmallObject(move[0]);
-            }
-            else if (count > capacity11 && count <= capacity12)
-            {
-                SpawnSmallObject(move[1]);
-            }
-            else if (count > capacity12 && count <= capacity13)
-            {
-                SpawnSmallObject(move[2]);
-            }
-            else if (count > capacity13 && count <= capacity14)
-            {
-                SpawnSmallObject(move[3]);
-            }
-            else if (count > capacity14 && count <= capacity15)
-            {
-                SpawnSmallObject(move[4]);
-            }
 
-            else if (count > capacity15 && count <= capacity16)
-            {
-                SpawnSmallObject(move[0]);
-            }
-            else if (count > capacity16 && count <= capacity17)
-            {
-                SpawnSmallObject(move[1]);
-            }
-            else if (count > capacity17 && count <= capacity18)
-            {
-                SpawnSmallObject(move[2]);
-            }
-            else if (count > capacity18 && count <= capacity19)
-            {
-                SpawnSmallObject(move[3]);
-            }
-            else if (count > capacity19 && count <= capacity20)
-            {
-                SpawnSmallObject(move[4]);
-            }
+                //  Conditions for spawning small objects based on capacity
 
-            else if (count > capacity20 && count <= capacity21)
-            {
-                SpawnSmallObject(move[0]);
-            }
-            else if (count > capacity21 && count <= capacity22)
-            {
-                SpawnSmallObject(move[1]);
-            }
-            else if (count > capacity22 && count <= capacity23)
-            {
-                SpawnSmallObject(move[2]);
-            }
-            else if (count > capacity23 && count <= capacity24)
-            {
-                SpawnSmallObject(move[3]);
-            }
-            else if (count > capacity24 && count <= capacity25)
-            {
-                SpawnSmallObject(move[4]);
-            }
+                if (count > 0 && count <= capacity1)
+                {
+                    /*if(destinationIndex == 0)
+                    {
+                        full = false;
+                    }*/
 
-            else if (count > capacity25 && count <= capacity26)
-            {
-                SpawnSmallObject(move[0]);
+                    //SpawnSmallObject(move[0]);  
+                }
+
+                else if (count > capacity1 && count <= capacity2)
+                {
+                    //SpawnSmallObject(move[1]);
+
+                }
+
+                else if (count > capacity2 && count <= capacity3)
+                {
+                    //SpawnSmallObject(move[2]);
+                }
+
+                else if (count > capacity3 && count <= capacity4)
+                {
+                    //SpawnSmallObject(move[3]);
+                }
+                else if (count > capacity4 && count <= capacity5)
+                {
+                    //SpawnSmallObject(move[4]);
+                }
+
             }
-            else if (count > capacity26 && count <= capacity27)
-            {
-                SpawnSmallObject(move[1]);
-            }
-            else if (count > capacity27 && count <= capacity28)
-            {
-                SpawnSmallObject(move[2]);
-            }
-            else if (count > capacity28 && count <= capacity29)
-            {
-                SpawnSmallObject(move[3]);
-            }
-            else if (count > capacity29 && count <= capacity30)
-            {
-                SpawnSmallObject(move[4]);
-            }*/
         }
     }
 

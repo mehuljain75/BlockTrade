@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GPU_Speed : MonoBehaviour
 {
     public NavMeshAgent agent;
-    public  Button button;
+    public  Button[] button;
 
     private void Start()
     {
@@ -13,7 +13,15 @@ public class GPU_Speed : MonoBehaviour
     }
     private void Update()
     {
-        button.onClick.AddListener(FactoryLevel10); 
+        button[0].onClick.AddListener(FactoryLevel2); 
+        button[1].onClick.AddListener(FactoryLevel3); 
+        button[2].onClick.AddListener(FactoryLevel4); 
+        button[3].onClick.AddListener(FactoryLevel5); 
+        button[4].onClick.AddListener(FactoryLevel6); 
+        button[5].onClick.AddListener(FactoryLevel7); 
+        button[6].onClick.AddListener(FactoryLevel8); 
+        button[7].onClick.AddListener(FactoryLevel9); 
+        button[8].onClick.AddListener(FactoryLevel10); 
     }
     public void FactoryLevel2()
     {
